@@ -1062,11 +1062,11 @@ const App: React.FC = () => {
     }
     if (category === 'cap') {
       return {
-        href: 'https://tyctw.github.io/115clock/',
-        badge: `${year} 會考生必看`,
-        title: '高中職升學管道與日程',
-        description: `${year} 學年度會考、免試入學與高中職升學重要時程整理，協助會考考生掌握志願選填節奏。`,
-        action: '查看會考升學時程',
+        href: 'https://tyctw.github.io/spare/',
+        badge: `${year} 會考落點分析`,
+        title: '會考落點分析與志願評估',
+        description: `${year} 學年度會考落點分析工具，協助會考考生依成績區間評估高中職志願選填方向。`,
+        action: '查看會考落點分析',
         accent: 'from-sky-500 to-cyan-500',
         glow: 'from-sky-200 to-cyan-200',
         text: 'text-sky-600',
