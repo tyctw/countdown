@@ -101,6 +101,33 @@ const getInitialDate = (initialExamId: string) => {
   return localStorage.getItem('gsat_target_date') || EXAM_PRESETS.find(p => p.id === initialExamId)?.date || '2027-01-16T09:20:00';
 };
 
+type ActivePage = 'home' | 'ranking' | 'learning' | 'achievements' | 'temple' | 'settings' | 'instructions' | 'privacy' | 'terms';
+
+const ACTIVE_PAGES: ActivePage[] = ['home', 'ranking', 'learning', 'achievements', 'temple', 'settings', 'instructions', 'privacy', 'terms'];
+
+const getPageFromUrl = (): ActivePage => {
+  const pageParam = new URLSearchParams(window.location.search).get('page');
+  return ACTIVE_PAGES.includes(pageParam as ActivePage) ? pageParam as ActivePage : 'home';
+};
+
+const getAppUrl = (examId: string, page: ActivePage) => {
+  const basePath = import.meta.env.BASE_URL || '/';
+  const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+  const url = new URL(window.location.href);
+  url.pathname = `${normalizedBase}${examId}`;
+  const params = new URLSearchParams(url.search);
+
+  if (page === 'home') {
+    params.delete('page');
+  } else {
+    params.set('page', page);
+  }
+
+  url.search = params.toString();
+  url.hash = '';
+  return `${url.pathname}${url.search ? `?${url.search}` : ''}`;
+};
+
 const SEO_PAGE_LABELS = {
   home: '',
   ranking: '排行榜',
@@ -218,7 +245,7 @@ const App: React.FC = () => {
   const [authInitialMode, setAuthInitialMode] = useState<'login' | 'signup' | 'forgot' | 'reset' | 'profile' | 'change-password' | 'devices' | undefined>(undefined);
   const [authInitialEmail, setAuthInitialEmail] = useState<string | undefined>(undefined);
   const [authInitialResetCode, setAuthInitialResetCode] = useState<string | undefined>(undefined);
-  const [activePage, setActivePage] = useState<'home' | 'ranking' | 'learning' | 'achievements' | 'temple' | 'settings' | 'instructions' | 'privacy' | 'terms'>('home');
+  const [activePage, setActivePage] = useState<ActivePage>(() => getPageFromUrl());
   const [isScoreWarningOpen, setIsScoreWarningOpen] = useState(false);
   const [isLoginSuggestionOpen, setIsLoginSuggestionOpen] = useState(false);
   const [isExamReminderOpen, setIsExamReminderOpen] = useState(false);
@@ -233,11 +260,46 @@ const App: React.FC = () => {
   const [achievementQueue, setAchievementQueue] = useState<Achievement[]>([]);
   const [currentAchievementToast, setCurrentAchievementToast] = useState<Achievement | null>(null);
   const [showWelcome, setShowWelcome] = useState(() => sessionStorage.getItem('gsat_welcome_pending') === 'true');
+  const hasSyncedHistoryRef = useRef(false);
   
   // Confirm Reset State
   const [confirmResetType, setConfirmResetType] = useState<'tasks' | 'sessions' | 'dates' | null>(null);
 
   // Info Modals State
+
+  useEffect(() => {
+    const nextUrl = getAppUrl(targetExam, activePage);
+    const currentUrl = `${window.location.pathname}${window.location.search}`;
+    const historyState = { ...(window.history.state || {}), activePage, targetExam };
+
+    if (currentUrl === nextUrl) {
+      hasSyncedHistoryRef.current = true;
+      return;
+    }
+
+    if (hasSyncedHistoryRef.current) {
+      window.history.pushState(historyState, '', nextUrl);
+    } else {
+      window.history.replaceState(historyState, '', nextUrl);
+      hasSyncedHistoryRef.current = true;
+    }
+  }, [activePage, targetExam]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setActivePage(getPageFromUrl());
+      setIsMenuOpen(false);
+      setIsSettingsOpen(false);
+      setIsCommunityStudyOpen(false);
+      setIsScoreWarningOpen(false);
+      setIsLoginSuggestionOpen(false);
+      setIsExamReminderOpen(false);
+      setIsAnnouncementOpen(false);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     if (activePage === 'home') return;
