@@ -86,25 +86,25 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
           exit={{ opacity: 0, filter: 'blur(10px)' }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           onClick={handleClose}
-          className="fixed inset-0 z-[100] flex cursor-pointer select-none items-center justify-center overflow-hidden bg-slate-950/95 px-4 py-8 text-white backdrop-blur-2xl"
+          className="fixed inset-0 z-[100] flex cursor-pointer select-none items-center justify-center overflow-hidden bg-slate-50/95 px-4 py-8 text-slate-900 backdrop-blur-2xl"
           role="status"
           aria-live="polite"
         >
           <motion.div
             aria-hidden="true"
-            className="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/25 blur-3xl"
+            className="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-200/70 blur-3xl"
             animate={{ scale: [0.9, 1.08, 0.98], opacity: [0.45, 0.72, 0.5] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
             aria-hidden="true"
-            className="absolute -right-20 top-12 h-72 w-72 rounded-full bg-teal-400/25 blur-3xl"
+            className="absolute -right-20 top-12 h-72 w-72 rounded-full bg-teal-200/70 blur-3xl"
             animate={{ y: [0, 24, 0], x: [0, -18, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
             aria-hidden="true"
-            className="absolute -bottom-24 left-8 h-80 w-80 rounded-full bg-fuchsia-500/20 blur-3xl"
+            className="absolute -bottom-24 left-8 h-80 w-80 rounded-full bg-fuchsia-200/60 blur-3xl"
             animate={{ y: [0, -20, 0], scale: [1, 1.12, 1] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -114,18 +114,18 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: -16, scale: 0.98, opacity: 0 }}
             transition={{ type: 'spring', damping: 22, stiffness: 180 }}
-            className="relative w-full max-w-[560px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.08] p-1 shadow-[0_30px_100px_rgba(15,23,42,0.55)]"
+            className="relative w-full max-w-[560px] overflow-hidden rounded-[2rem] border border-white/80 bg-white/70 p-1 shadow-[0_30px_100px_rgba(79,70,229,0.18)]"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
-            <div className="relative overflow-hidden rounded-[1.75rem] bg-[radial-gradient(circle_at_20%_0%,rgba(129,140,248,.32),transparent_34%),linear-gradient(145deg,rgba(255,255,255,.15),rgba(255,255,255,.06))] p-6 sm:p-8">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/70 bg-[radial-gradient(circle_at_20%_0%,rgba(199,210,254,.55),transparent_34%),linear-gradient(145deg,rgba(255,255,255,.96),rgba(248,250,252,.82))] p-6 sm:p-8">
               <motion.div
                 aria-hidden="true"
-                className="absolute right-8 top-8 h-24 w-24 rounded-full border border-white/10"
+                className="absolute right-8 top-8 h-24 w-24 rounded-full border border-indigo-100"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
               >
-                <span className="absolute -left-1 top-7 h-2.5 w-2.5 rounded-full bg-teal-300 shadow-[0_0_20px_rgba(94,234,212,0.9)]" />
+                <span className="absolute -left-1 top-7 h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_20px_rgba(45,212,191,0.8)]" />
               </motion.div>
 
               <div className="relative z-10 flex flex-col items-center text-center">
@@ -135,9 +135,9 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
                   transition={{ type: 'spring', damping: 14, stiffness: 170, delay: 0.12 }}
                   className="relative mb-6 flex h-24 w-24 items-center justify-center"
                 >
-                  <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-indigo-500 via-violet-500 to-teal-400 shadow-[0_22px_60px_rgba(79,70,229,0.45)]" />
+                  <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-indigo-500 via-violet-500 to-teal-400 shadow-[0_22px_60px_rgba(79,70,229,0.30)]" />
                   <motion.div
-                    className="absolute inset-2 rounded-[1.5rem] border border-white/25"
+                    className="absolute inset-2 rounded-[1.5rem] border border-white/40"
                     animate={{ scale: [1, 1.08, 1], opacity: [0.65, 1, 0.65] }}
                     transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
                   />
@@ -152,9 +152,9 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.28 }}
-                  className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-indigo-100"
+                  className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50/80 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-indigo-700"
                 >
-                  <Sparkles className="h-3.5 w-3.5 text-amber-200" />
+                  <Sparkles className="h-3.5 w-3.5 text-amber-500" />
                   {copy.eyebrow}
                 </motion.div>
 
@@ -162,7 +162,7 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.42 }}
-                  className="max-w-xl text-3xl font-black tracking-tight text-white sm:text-5xl"
+                  className="max-w-xl text-3xl font-black tracking-tight text-slate-950 sm:text-5xl"
                 >
                   {copy.title}
                 </motion.h2>
@@ -171,7 +171,7 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.58 }}
-                  className="mt-4 max-w-md text-sm font-semibold leading-7 text-slate-200 sm:text-base"
+                  className="mt-4 max-w-md text-sm font-semibold leading-7 text-slate-600 sm:text-base"
                 >
                   {copy.subtitle}
                 </motion.p>
@@ -182,12 +182,12 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
                   transition={{ delay: 0.78 }}
                   className="mt-7 grid w-full grid-cols-1 gap-3 sm:grid-cols-2"
                 >
-                  <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-left backdrop-blur">
-                    <div className="flex items-center gap-2 text-xs font-black text-teal-100">
+                  <div className="rounded-2xl border border-teal-100 bg-teal-50/70 px-4 py-3 text-left backdrop-blur">
+                    <div className="flex items-center gap-2 text-xs font-black text-teal-700">
                       <Cloud className="h-4 w-4" />
                       {copy.status}
                     </div>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
+                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-teal-100">
                       <motion.div
                         className="h-full rounded-full bg-gradient-to-r from-teal-300 to-indigo-300"
                         initial={{ width: '0%' }}
@@ -197,12 +197,12 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-left backdrop-blur">
-                    <div className="flex items-center gap-2 text-xs font-black text-indigo-100">
+                  <div className="rounded-2xl border border-indigo-100 bg-indigo-50/70 px-4 py-3 text-left backdrop-blur">
+                    <div className="flex items-center gap-2 text-xs font-black text-indigo-700">
                       <ShieldCheck className="h-4 w-4" />
                       安全登入已確認
                     </div>
-                    <div className="mt-2 text-[11px] font-semibold text-slate-300">
+                    <div className="mt-2 text-[11px] font-semibold text-slate-500">
                       可以繼續計時、同步與查看排行。
                     </div>
                   </div>
@@ -212,7 +212,7 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ userName, onComplete }) =
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.15 }}
-                  className="mt-6 text-[11px] font-bold text-white/35"
+                  className="mt-6 text-[11px] font-bold text-slate-400"
                   onClick={handleClose}
                 >
                   點擊任意處以跳過
