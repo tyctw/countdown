@@ -59,6 +59,12 @@ const DEFAULT_PLAYLISTS: Playlist[] = [
   { id: 'default', name: '預設歌單', tracks: DEFAULT_MUSIC_TRACKS }
 ];
 
+const getExamIdFromPath = () => {
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const candidate = pathParts.find(part => EXAM_PRESETS.some(p => p.id === part.toLowerCase()));
+  return candidate?.toLowerCase();
+};
+
 const getInitialExamId = () => {
   const params = new URLSearchParams(window.location.search);
   const examParam = params.get('exam')?.toLowerCase();
@@ -66,12 +72,9 @@ const getInitialExamId = () => {
     return examParam;
   }
   
-  const pathParts = window.location.pathname.split('/').filter(Boolean);
-  if (pathParts.length > 0) {
-    const potentialExam = pathParts[0].toLowerCase();
-    if (EXAM_PRESETS.some(p => p.id === potentialExam)) {
-      return potentialExam;
-    }
+  const pathExam = getExamIdFromPath();
+  if (pathExam) {
+    return pathExam;
   }
   
   return localStorage.getItem('gsat_target_exam') || '116gsat';
@@ -85,12 +88,8 @@ const getInitialDate = (initialExamId: string) => {
     fromUrl = true;
   }
   
-  const pathParts = window.location.pathname.split('/').filter(Boolean);
-  if (pathParts.length > 0) {
-    const potentialExam = pathParts[0].toLowerCase();
-    if (EXAM_PRESETS.some(p => p.id === potentialExam)) {
-      fromUrl = true;
-    }
+  if (getExamIdFromPath()) {
+    fromUrl = true;
   }
 
   if (fromUrl) {

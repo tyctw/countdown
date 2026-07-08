@@ -1,4 +1,4 @@
-const SITE_URL = 'https://ceecc.vercel.app';
+const SITE_URL = 'https://tyctw.github.io/countdown';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 const DEFAULT_IMAGE_ALT = 'Focus Space 大考倒數：學測、會考、統測、分科測驗讀書計時助手';
 
